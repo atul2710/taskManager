@@ -11,6 +11,10 @@ import Task as ts
 Method to display the the start menu
 '''
 def start_menu():
+    print("Welcome to Task Manager")
+    print("************************")
+    print("********MAIN MENU*******")
+    print("************************")
     print("Plese select your option:")
     print ("\t1. Enter 1 for New User Registration")
     print ("\t2. Enter 2 for Existing User")
@@ -34,9 +38,7 @@ def login():
 
 
 ######################################
-
 #   Main program   #
-
 ######################################
 # check if the data folder exist
 if not os.path.exists(us.data_folder):
@@ -45,43 +47,46 @@ if not os.path.exists(us.data_folder):
 us.load_users()
 
 # Display start menu
-start_menu()
-option = input ("Enter your option: ")
-match option:
-    case '1':
-        username = input("Enter username: ")
-        password = getpass.getpass("Enter password: ")
-        us.add_user(username, password)
-    case '2':
-        username = input("Enter username: ")
-        password = getpass.getpass("Enter password: ")
-        if(us.validate_user_credentials(username, password)):
-            while True:
-                user_menu()
-                option = input ("Enter your option: ")
-                match option:
-                    case '1':
-                        print ("View Task")
-                        ts.view_tasks()
-                    case '2':
-                        print ("Add Task")
-                        task_description = input("Enter task description: ")
-                        ts.add_task(task_description)
-                    case '3':
-                        print ("Update Task")
-                        task_id = input("Enter task id: ")
-                        status = input("Enter status: ")
-                        ts.update_task(task_id, status)
-                    case '4':
-                        print ("Delete Task")
-                        task_id = input("Enter task id: ")
-                        ts.delete_task(task_id)
-                    case '5':
-                        print ("Exiting Application")
-                        break
-                    case _:
-                        print ("Invalid option!!")
-    case '3':
-        print ("Exiting Application")
-    case _:
-        print ("Invalid option!!")
+while True:
+    start_menu()
+    option = input ("Enter your option: ")
+    match option:
+        case '1':
+            username = input("Enter username: ")
+            password = getpass.getpass("Enter password: ")
+            us.add_user(username, password)
+        case '2':
+            username = input("Enter username: ")
+            password = getpass.getpass("Enter password: ")
+            if(us.validate_user_credentials(username, password)):
+                ts.load_tasks()
+                while True:
+                    user_menu()
+                    option = input ("Enter your option: ")
+                    match option:
+                        case '1':
+                            print ("View Task")
+                            ts.view_tasks()
+                        case '2':
+                            print ("Add Task")
+                            task_description = input("Enter task description: ")
+                            ts.add_task(task_description)
+                        case '3':
+                            print ("Update Task")
+                            task_id = input("Enter task id: ")
+                            status = input("Enter status: ")
+                            ts.update_task(task_id, status)
+                        case '4':
+                            print ("Delete Task")
+                            task_id = input("Enter task id: ")
+                            ts.delete_task(task_id)
+                        case '5':
+                            print ("Exiting User Menu")
+                            break
+                        case _:
+                            print ("Invalid option!!")
+        case '3':
+            print ("Exiting Application")
+            break
+        case _:
+            print ("Invalid option!!")

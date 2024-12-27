@@ -20,10 +20,11 @@ def load_tasks():
     #check if the file data/{current_user}_tasks.json exist 
     #if file doesn't exit, create a file
     #if file exist, load the tasks to the task dict
-    print ("Loading tasks.....")
-    if task_file_path is None:
-        task_file_name = us.current_user + '_' + task_file
+    print ("Loading tasks for User: ", us.current_user)
+    
+    task_file_name = us.current_user + '_' + task_file
     task_file_path = os.path.join(us.data_folder, task_file_name)
+
     if os.path.exists(task_file_path):
         with open(task_file_path, 'r') as file:
             data = file.read()
@@ -108,5 +109,10 @@ def delete_task(task_id):
     if len(current_user_tasks) == 0:
         print("No tasks found")
         return
-    del current_user_tasks[task_id]
-    save_tasks()
+    if task_id in current_user_tasks : 
+        del current_user_tasks[task_id]
+        print (f"Task: {task_id} deleted successfully")
+        save_tasks()
+    else:
+        print("Task not found")
+    
