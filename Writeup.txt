@@ -1,0 +1,14 @@
+TaskManager is a utility to track task of multiple users as requested in the Assignment. 
+
+Main.py: 
+Main.py is to be executed to run the program. It displays the Main Menu for the User Registration
+login. Once user login is succesful, User menu is displayed to View, Add, Update and Delete task.
+
+Users.py:
+This file has methods to add a new user. The users are stored in users.json as a dictionary.
+Whenever the program is started, users are loaded from users.json file. Passwords are hashed 
+before storing. 
+
+Task.py:
+This file has methods to manage task of a user with has logged into the application. Task for each
+user are saved in seperate json files. Screenshots for the same are attached. 
